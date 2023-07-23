@@ -1,8 +1,10 @@
 import { initializeApp } from "firebase/app";
 import {
+  
   getFirestore,
   collection,
   doc,
+  addDoc,
   setDoc,
   getDoc,
   updateDoc,
@@ -181,6 +183,50 @@ export async function register(email, password) {
       throw error;
     });
 }
+
+export async function cscCollection () {
+  const cscRef = collection(db, "CSC_class_data")
+  
+  let data = { // Data going into firebase but it should be separated into 4 collections (CSC key data, the first 3 variables) (CSC class data, like this function but key data is referenced)
+    label: "CSC 126",
+    tooltip: "Introduction to Computer Science",
+    url: "https://csi-undergraduate.catalog.cuny.edu/courses/0626561",
+    canBeTaken: false,
+    canBeUntaken: false,
+    isTaken: false,
+    noLongerAvaliable: false
+  }
+
+  try {
+    addDoc(cscRef,data)
+  }
+  catch (error){
+    throw error
+  }
+}
+
+export async function mthCollection () {
+  const mthRef = collection(db, "MTH_class_data")
+  
+  let data = { // Data going into firebase but it should be separated into 4 collections (MTH key data, the first 3 variables) (MTH class data, like this function but key data is referenced)
+    tooltip: "College Algebra and Trigonometry",
+    label: "MTH 123",
+    url: "https://csi-undergraduate.catalog.cuny.edu/courses/0660871",
+    canBeTaken: false,
+    canBeUntaken: false,
+    isTaken: false,
+    noLongerAvaliable: false
+  }
+
+  try {
+    addDoc(mthRef,data)
+  }
+  catch (error){
+    throw error
+  }
+}
+
+
 
 export async function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
